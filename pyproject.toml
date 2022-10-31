@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "chalice-url-shortener"
+version = "0.1.0"
+description = ""
+authors = ["Jarbton <j.barton.mail@googlemail.com>"]
+readme = "README.md"
+packages = []
+
+[tool.poetry.dependencies]
+python = "^3.10"
+chalice = "^1.27.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
