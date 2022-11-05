@@ -4,6 +4,16 @@
 # OS generated files
 .DS_Store
 
+# Editor directories and files
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Chalice
+.url-shortener/chalice/deployments/
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
