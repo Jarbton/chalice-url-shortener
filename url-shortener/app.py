@@ -1,29 +1,18 @@
 from chalice import Chalice
+from utils import get_short_url, get_long_url, store_url
 
 app = Chalice(app_name='url-shortener')
 
 
-@app.route('/')
-def index():
-    return {'hello': 'world'}
+@app.route('/shorten', methods=['POST'])
+def shorten():
+    url = app.current_request.json_body['url']
+    short_url = get_short_url()
+    store_url(short_url, url)
+    return {'url': short_url}
 
 
-# The view function above will return {"hello": "world"}
-# whenever you make an HTTP GET request to '/'.
-#
-# Here are a few more examples:
-#
-# @app.route('/hello/{name}')
-# def hello_name(name):
-#    # '/hello/james' -> {"hello": "james"}
-#    return {'hello': name}
-#
-# @app.route('/users', methods=['POST'])
-# def create_user():
-#     # This is the JSON body the user sent in their POST request.
-#     user_as_json = app.current_request.json_body
-#     # We'll echo the json body back to the user in a 'user' key.
-#     return {'user': user_as_json}
-#
-# See the README documentation for more examples.
-#
+@app.route('/{short_url}')
+def redirect(short_url):
+    long_url = get_long_url(short_url)
+    return app.current_response.redirects(long_url)
